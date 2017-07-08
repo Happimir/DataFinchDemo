@@ -1,0 +1,14 @@
+{
+  "name": "datafinch",
+  "version": "1.0.0",
+  "description": "demo of chart.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Kovalsky",
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^2.6.0"
+  }
+}
