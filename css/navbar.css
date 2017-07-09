@@ -1,0 +1,7 @@
+#homeBtn, homeContainer {
+    background-color: greenyellow;
+}
+
+#myNav ul li:hover {
+    background-color: red;
+}

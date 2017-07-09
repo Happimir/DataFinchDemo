@@ -5,49 +5,225 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+         <!-- Local CSS Files-->
+        <link rel="stylesheet" href="../css/navbar.css">
+        <link rel="stylesheet" href="../css/index.css">
 
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="../javascript/linechart.js"></script>
+        <!-- Local JavaScript Files-->
+        <script type="text/javascript" src="../javascript/commonCharts.js"></script>
+        <script type="text/javascript" src="../javascript/advancedCharts.js"></script>
         
     </head>
     
     <body>
             
       <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNav">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Home</a>
-        </div>
-        <div>
-            <div class="collapse navbar-collapse" id="myNav">
-                <ul class="nav navbar-nav">
-                    <li><a href="#submission">Basic Graphs</a></li>
-                    <li><a href="#geolocation-results">Advanced Graphs</a></li>
-                    <li><a href="#map">Combos</a></li>
+        <div class="container-fluid">
+            <div id="homeContainer" class="navbar-header"> 
+                <a id="homeBtn" class="navbar-brand" style="color:white;font-weight:1000" href="#">Home</a>
+            </div>
+            <div>
+                <div class="collapse navbar-collapse" id="myNav">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#basicGraphs" style="color:white;font-weight:700" onclick="showBasicGraphs()">Basic Graphs</a></li>
+                        <li><a href="#advancedGraphs" style="color:white;font-weight:700" onclick="showAdvancedGraphs()">Advanced Graphs</a></li>
+                        <li><a href="#map" style="color:white;font-weight:700">Combos</a></li>
 
-                </ul>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</nav>    
+      </nav>    
     
      <div class="jumbotron" >
          <h1 style="text-align:center; height:4%">Bootstrap Is Life, Laura. Bootstrap Is CSS.</h1>
      </div>
      
         <div class="container" style="width:100%">
-            <canvas id="myGraph" style="width:50%; height:20%"> </canvas>
+            
+            <div id="basicGraphs" class="panel panel-default" style="width:100%; height:50%">
+                <div class="panel-heading"><h4>Basic graphs are supported straight out of the box, ensuring the ability to deliver data in a clearly familiar format to those who may not be most up-to-date with the latest graphing techniques.</h4></div>
+              <div class="col-sm-4" style="width:33%; height:50%"><canvas id="lineGraph" style="width:33%; height:50%"></canvas></div>
+              <div class="col-sm-4" style="width:33%; height:50%"><canvas id="barGraph" style="width:33%; height:50%"></canvas></div>
+              <div class="col-sm-4" style="width:33%; height:50%"><canvas id="pieGraph" style="width:33%; height:50%"></canvas></div>
+                   
+            </div>
+            <button type="button" class="btn btn-info pull-right" data-toggle="collapse" data-target="#codeBehind">Show Code</button>   
+            <br />
+            
+            <div id="codeBehind" class="collapse panel panel-default" style="width:100%; height:50%">
+                <div class="panel-heading"><h4>JavaScript Code Behind</h4></div>
+                <table class="table table-bordered" style="width:100%">
+                    <tr style="width:100%">
+                        <td style="width:33%"><strong>Line Graph</strong></td>
+                        <td style="width:33%"><strong>Bar Graph</strong></td>
+                        <td style="width:33%"><strong>Pie Chart</strong></td>
+                    </tr>
+                    <tr style="width:100%">
+                        <td style="width:33%">
+                            <pre style="width:100%; height: 400px">
+var ctx1 = $("#lineGraph")[0].getContext('2d');
+var myChart1 = new Chart(ctx1, {
+  type: 'line',
+  data: {
+    labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+    datasets: [{
+      label: 'apples',
+      data: [12, 19, 3, 17, 6, 3, 7],
+      backgroundColor: "rgba(153,255,51,0.4)"
+    }, {
+      label: 'oranges',
+      data: [2, 29, 5, 5, 2, 3, 10],
+      backgroundColor: "rgba(255,153,0,0.4)"
+    }]
+  }
+});
+                            </pre>
+                        </td>
+                        <td style="width:33%">
+                            <pre style="width:100%; height: 400px">
+var ctx2 = $("#barGraph")[0].getContext('2d');
+var myChart2 = new Chart(ctx2, {
+  type: 'bar',
+  data: {
+    labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+    datasets: [{
+      label: 'apples',
+      data: [12, 19, 3, 17, 6, 3, 7],
+      backgroundColor: "rgba(153,255,51,0.4)"
+    }, {
+      label: 'oranges',
+      data: [2, 29, 5, 5, 2, 3, 10],
+      backgroundColor: "rgba(255,153,0,0.4)"
+    }]
+  }
+});</pre>
+                        </td>
+                        <td style="width:33%">
+                            <pre style="width:100%; height: 400px">
+var ctx3 = $("#pieGraph")[0].getContext('2d');
+var myChart3 = new Chart(ctx3, {
+  type: 'pie',
+  data: {
+    labels: ["M", "T", "W", "T", "F", "S", "S"],
+    datasets: [{
+      backgroundColor: [
+        "#2ecc71",
+        "#3498db",
+        "#95a5a6",
+        "#9b59b6",
+        "#f1c40f",
+        "#e74c3c",
+        "#34495e"
+      ],
+      data: [12, 19, 3, 17, 28, 24, 7]
+    }]
+  }
+});</pre>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
       
-    
+        
+        
+        <div id="advancedGraphs" class="panel panel-default" style="width:100%; height:50%">
+                <div class="panel-heading"><h4>Along with basic graphs, ChartJS also supports more advanced graphs. Namely: Polar, Radar, and Doughnut.</h4></div>
+                <div class="panel-body" style="width:100%; height:80%">
+                    <div class="col-sm-4" style="width:33%; height:50%"><canvas id="polarGraph" style="width:33%; height:50%"></canvas></div>
+                    <div class="col-sm-4" style="width:33%; height:50%"><canvas id="radarGraph" style="width:33%; height:50%"></canvas></div>
+                    <div class="col-sm-4" style="width:33%; height:50%"><canvas id="doughnutGraph" style="width:33%; height:50%"></canvas></div>
+                </div>
+                <div class="panel-footer" style="height:50px"><span style="text-align:left; font-weight:bold">Show Code</span><button type="button" class="btn btn-info pull-right" data-toggle="collapse" data-target="#codeBehindAdvanced">Show Code</button>   </div>
+        </div>
+        
+        <div id="codeBehindAdvanced" class="collapse panel panel-default" style="width:100%; height:50%">  
+            <div class="panel-heading"><h4>JavaScript Code Behind</h4></div>
+            <div class="panel-body" style="width:100%; height:50%">
+                <table class="table table-bordered" style="width:100%">
+                    <tr style="width:100%">
+                        <td style="width:33%">Polar Graph</td>
+                        <td style="width:33%">Radar Graph</td>
+                        <td style="width:33%">Doughnut Graph</td>
+                    </tr>
+                    <tr style="width:100%">
+                        <td style="width:33%">
+                            <pre style="width:100%; height: 400px">
+var ctx2 = $("#polarGraph")[0].getContext('2d');
+var myChart2 = new Chart(ctx2, {
+  type: 'polarArea',
+  data: {
+    labels: ["M", "T", "W", "T", "F", "S", "S"],
+    datasets: [{
+      backgroundColor: [
+        "#2ecc71",
+        "#3498db",
+        "#95a5a6",
+        "#9b59b6",
+        "#f1c40f",
+        "#e74c3c",
+        "#34495e"
+      ],
+      data: [12, 19, 3, 17, 28, 24, 7]
+    }]
+  }
+});
+</pre>
+                        </td>
+                        <td style="width:33%">
+                            <pre style="width:100%; height: 400px"> 
+var ctx1 = $("#radarGraph")[0].getContext('2d');
+var myChart1 = new Chart(ctx1, {
+  type: 'radar',
+  data: {
+    labels: ["M", "T", "W", "T", "F", "S", "S"],
+    datasets: [{
+      label: 'apples',
+      backgroundColor: "rgba(153,255,51,0.4)",
+      borderColor: "rgba(153,255,51,1)",
+      data: [12, 19, 3, 17, 28, 24, 7]
+    }, {
+      label: 'oranges',
+      backgroundColor: "rgba(255,153,0,0.4)",
+      borderColor: "rgba(255,153,0,1)",
+      data: [30, 29, 5, 5, 20, 3, 10]
+    }]
+  }
+});</pre>
+                        </td>
+                        <td style="width:33%">
+                            <pre style="width:100%; height: 400px">
+var ctx3 = document.getElementById("doughnutGraph").getContext('2d');
+var myChart3 = new Chart(ctx3, {
+  type: 'doughnut',
+  data: {
+    labels: ["M", "T", "W", "T", "F", "S", "S"],
+    datasets: [{
+      backgroundColor: [
+        "#2ecc71",
+        "#3498db",
+        "#95a5a6",
+        "#9b59b6",
+        "#f1c40f",
+        "#e74c3c",
+        "#34495e"
+      ],
+      data: [12, 19, 3, 17, 28, 24, 7]
+    }]
+  }
+});
+    </pre>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
     </body>
     
