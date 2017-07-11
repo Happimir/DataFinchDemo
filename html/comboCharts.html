@@ -1,8 +1,7 @@
  <head>
         
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
-        <script type="text/javascript" src="https://rawgit.com/nnnick/Chart.js/v1.0.2/Chart.min.js"></script>
-        <!-- Latest compiled and minified CSS -->
+     
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
          <!-- Local CSS Files-->
         <link rel="stylesheet" href="../css/navbar.css">
@@ -15,6 +14,7 @@
         <!-- Local JavaScript Files-->
         <script type="text/javascript" src="../javascript/comboCharts.js"></script>
         
+        <link rel="stylesheet" href="../css//index.css">
     </head>
 
 <body>
@@ -29,9 +29,8 @@
                 <div class="collapse navbar-collapse" id="myNav">
                     <ul class="nav navbar-nav">
                         <li><a href="#lineInLine" style="color:white;font-weight:700">Lines On Chart</a></li>
-                        <li><a href="#advancedGraphs" style="color:white;font-weight:700" >Two Graphs In One</a></li>
-                        <li><a href="#map" style="color:white;font-weight:700">Leveraging Canavas'</a></li>
-                        <li><a href="../html/moreInfo" style="color:white; font-weight:700">More Info</a></li>
+                        <li><a href="#twoGraphContainer" style="color:white;font-weight:700" onclick="twoGraphs()">Two Graphs In One</a></li>
+                        <li><a href="#nestedDoughNuts" style="color:white;font-weight:700" onclick="nestedDoughnut()">Nested Doughnut</a></li>
                     </ul>
                 </div>
             </div>
@@ -42,6 +41,20 @@
         <div class="panel-heading" style="width:100%">Line in Line</div>
         <div class="panel-body" style="width:100%">
             <canvas id="LineWithLine" style="width:100%; height:400px"></canvas>
+        </div>
+    </div>
+    
+    <div id="twoGraphContainer" class="panel panel-default" style="width:100%; height:50%">
+        <div class="panel-heading" style="width:100%">Two Graphs</div>
+        <div class="panel-body" style="width:100%">
+            <canvas id="twoGraph" style="width:100%; height:400px"></canvas>
+        </div>
+    </div>
+    
+    <div id="nestedDoughNuts" class="panel panel-default" style="width:100%; height:50%">
+        <div class="panel-heading" style="width:100%">Nested Doughnuts</div>
+        <div class="panel-body" style="width:100%">
+            <canvas id="nestedDoughnut" style="width:100%" height="400px"></canvas>
         </div>
     </div>
     

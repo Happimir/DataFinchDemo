@@ -1,42 +1,143 @@
 window.onload = function() {
-    var data = {
-    labels: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+   var originalLineDraw = Chart.controllers.line.prototype.draw;
+Chart.helpers.extend(Chart.controllers.line.prototype, {
+  draw: function() {
+    originalLineDraw.apply(this, arguments);
+
+    var chart = this.chart;
+    var ctx = chart.chart.ctx;
+
+    var index = chart.config.data.lineAtIndex;
+    if (index) {
+      var xaxis = chart.scales['x-axis-0'];
+      var yaxis = chart.scales['y-axis-0'];
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(xaxis.getPixelForValue(undefined, index), yaxis.top);
+      ctx.strokeStyle = '#ff0000';
+      ctx.lineTo(xaxis.getPixelForValue(undefined, index), yaxis.bottom);
+      ctx.stroke();
+      ctx.restore();  
+    }
+  }
+});
+
+var config = {
+  type: 'line',
+  data: {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [{
-        data: [12, 3, 2, 1, 8, 8, 2, 2, 3, 5, 7, 1]
-    }]
+      label: "My First dataset",
+      data: [65, 0, 80, 81, 56, 85, 40],
+      fill: false
+    }],
+    lineAtIndex: 2
+  }
 };
 
 var ctx = document.getElementById("LineWithLine").getContext("2d");
-
-Chart.types.Line.extend({
-    name: "LineWithLine",
-    draw: function () {
-        Chart.types.Line.prototype.draw.apply(this, arguments);
-        
-            
-        var strings = ["TODAY", "TOMORROW!!!", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN", "ELEVEN", "TWELEVE"]
-        for(var i = 0; i < this.datasets[0].points.length; i++) {
-        
-            var point = this.datasets[0].points[i]
-            var scale = this.scale
-
-            // draw line
-            this.chart.ctx.beginPath();
-            this.chart.ctx.moveTo(point.x, scale.startPoint + 24);
-            this.chart.ctx.strokeStyle = '#ff0000';
-            this.chart.ctx.lineTo(point.x, scale.endPoint);
-            this.chart.ctx.stroke();
-
-            // write TODAY
-            this.chart.ctx.textAlign = 'center';
-            this.chart.ctx.fillText(strings[i], point.x, scale.startPoint + 12);
-        }
-        
-    }
-});
-
-new Chart(ctx).LineWithLine(data, {
-    datasetFill : false
-});
+new Chart(ctx, config);
 }
 
+function nestedDoughnut() {
+       
+var randomColorFactor = function() {
+    return Math.round(Math.random() * 255);
+};
+
+var config = {
+    type: 'doughnut',
+    data: {
+        datasets: [{
+            data: [
+                100,
+                100,
+                100,
+                100,
+                100
+            ],
+                backgroundColor: [
+                "#F7464A",
+                "#46BFBD",
+                "#FDB45C",
+                "#949FB1",
+                "#4D5360",
+            ],
+        }, {
+            data: [
+                90,90,90,90,90
+            ],
+                backgroundColor: [
+                "#F7464A",
+                "#46BFBD",
+                "#FDB45C",
+                "#949FB1",
+                "#4D5360",
+            ],
+        }, {
+            data: [
+                80,80,80,80,80
+            ],
+                backgroundColor: [
+                "#F7464A",
+                "#46BFBD",
+                "#FDB45C",
+                "#949FB1",
+                "#4D5360",
+            ],
+        },{
+            data: [
+                70,70,70,70,70
+            ],
+                backgroundColor: [
+                "#F7464A",
+                "#46BFBD",
+                "#FDB45C",
+                "#949FB1",
+                "#4D5360",
+            ],
+        }],
+        labels: [
+            "Red",
+            "Green",
+            "Yellow",
+            "Grey",
+            "Dark Grey"
+        ]
+    },
+    options: {
+        responsive: true
+    }
+};
+
+var ctx2 = document.getElementById("nestedDoughnut").getContext("2d");
+var myDoughnut = new Chart(ctx2, config);
+    
+}
+
+function twoGraphs() {
+    var config = {
+  type: 'bar',
+  data: {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [{
+      type: 'bar',
+      label: "My First dataset",
+      data: [65, 0, 80, 81, 56, 85, 40],
+      fill: false
+    },{
+    	type: 'line',
+      label: "My Second dataset",
+      data: [65, 0, 80, 81, 56, 85, 40],
+      fill: false,
+      borderColor: 'red',
+      pointStyle: 'line',
+      pointBorderWidth: 3
+    }]    
+  }
+};
+
+var ctx = document.getElementById("twoGraph").getContext("2d");
+new Chart(ctx, config);
+}
